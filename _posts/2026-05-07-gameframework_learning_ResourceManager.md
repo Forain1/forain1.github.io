@@ -135,9 +135,9 @@ private IResourceHelper m_ResourceHelper;//负责处理底层的资源加载和�
 
 - 单机模式
 
-![单机模式流程图](../assets/img/2026-05-07/mermaid1.png)
+![单机模式流程图](/assets/img/2026-05-07/mermaid1.png)
 
 
 - 联网模式
 
-![联网模式流程图](../assets/img/2026-05-07/mermaid2.png)
+![联网模式流程图](/assets/img/2026-05-07/mermaid2.png)

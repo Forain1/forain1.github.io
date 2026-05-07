@@ -9,7 +9,7 @@ description: 笔者有试着自己开发自己的游戏框架,但是写的太烂
 
 # 框架概述
 
-![alt text](..\assets\img\2026-04-30\image.png)
+![image](/assets/img/2026-04-30/image.png)
 
 通过图片可以看出来,框架主要分为两大块:
 - 核心底层框架:Core Framework,即构建其整套框架的底层逻辑与代码支持
