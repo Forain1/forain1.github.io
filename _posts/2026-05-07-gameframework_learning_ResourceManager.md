@@ -129,4 +129,15 @@ private ResourceLoader m_ResourceLoader;//处理资源的加载 依赖关系 对
 private IResourceHelper m_ResourceHelper;//负责处理底层的资源加载和释放操作 由顶层提供
 ```
 
-其他成员变量相对来说不那么重要,有分析到再进行解释
+其他成员变量相对来说不那么重要,有分析到再进行解释,下面放两张AI生成的流程图来大致理解不同模式下是如何进行资源加载的
+
+### 流程图
+
+- 单机模式
+
+![单机模式流程图](../assets/img/2026-05-07/mermaid1.png)
+
+
+- 联网模式
+
+![联网模式流程图](../assets/img/2026-05-07/mermaid2.png)
