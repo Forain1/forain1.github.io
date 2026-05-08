@@ -129,7 +129,8 @@ private ResourceLoader m_ResourceLoader;//处理资源的加载 依赖关系 对
 private IResourceHelper m_ResourceHelper;//负责处理底层的资源加载和释放操作 由顶层提供
 ```
 
-由于该框架是纯C#框架,因此有些实际接口需要我们主动注入:
+由于该框架是纯 C# 框架，因此有些实际接口需要我们主动注入：
+
 | 注入方法                                               | 是否必须              | 作用                 | 备注                                                        |
 | ------------------------------------------------------ | --------------------- | -------------------- | ----------------------------------------------------------- |
 | `SetReadOnlyPath(string)`                              | 必须                  | 设置只读资源路径     | 如 `Application.streamingAssetsPath`                        |
@@ -141,7 +142,7 @@ private IResourceHelper m_ResourceHelper;//负责处理底层的资源加载和�
 | `SetDownloadManager(IDownloadManager)`                 | 仅 Updatable 模式必须 | 设置下载管理器       | 资源热更新下载使用，通常接入框架内置下载模块                |
 | `SetFileSystemManager(IFileSystemManager)`             | 可选                  | 设置文件系统管理器   | 用于文件系统模式下的资源读取，可优化合并 AB 包存储          |
 | `SetCurrentVariant(string)`                            | 可选                  | 设置当前资源变体     | 如语言包、渠道包等资源变体标识                              |
-| `SetDecryptResourceCallback(...)`                      | 可选                  | 设置资源解密回调     | 不设置则使用默认逻辑                                        |
+| `SetDecryptResourceCallback(...)`                      | 可选                  | 设置资源解密回调     | 不设置则使用默认逻辑                                        |  |
 
 
 

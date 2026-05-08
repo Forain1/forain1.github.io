@@ -248,7 +248,7 @@ public class GoldUI : MonoBehaviour
 PlayerData 负责发布事件
 GoldUI 负责订阅事件
 
-## 原型模式
+## 原型模式 
 
 >使用特定原型实例来创建特定种类的对象，并且通过拷贝原型来创建新的对象
 {: .prompt-tip }
