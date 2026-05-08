@@ -114,7 +114,7 @@ private PackageVersionListSerializer m_PackageVersionListSerializer;//单机模�
 private UpdatableVersionListSerializer m_UpdatableVersionListSerializer;//可更新资源的序列化器
 private ReadOnlyVersionListSerializer m_ReadOnlyVersionListSerializer;//位于只读区资源的序列化器
 private ReadWriteVersionListSerializer m_ReadWriteVersionListSerializer;//位于读写区资源的序列化器
-private ResourcePackVersionListSerializer m_ResourcePackVersionListSerializer;//资源包序列化器
+private ResourcePackVersionListSerializer m_ResourcePackVersionListSerializer;//资源包序列化器,所谓的资源包可以理解为一些单独下载的资源包,不是从服务器下载的
 ```
 
 ```cs
@@ -129,9 +129,25 @@ private ResourceLoader m_ResourceLoader;//处理资源的加载 依赖关系 对
 private IResourceHelper m_ResourceHelper;//负责处理底层的资源加载和释放操作 由顶层提供
 ```
 
-其他成员变量相对来说不那么重要,有分析到再进行解释,下面放两张AI生成的流程图来大致理解不同模式下是如何进行资源加载的
+由于该框架是纯C#框架,因此有些实际接口需要我们主动注入:
+| 注入方法                                               | 是否必须              | 作用                 | 备注                                                        |
+| ------------------------------------------------------ | --------------------- | -------------------- | ----------------------------------------------------------- |
+| `SetReadOnlyPath(string)`                              | 必须                  | 设置只读资源路径     | 如 `Application.streamingAssetsPath`                        |
+| `SetReadWritePath(string)`                             | 必须                  | 设置读写资源路径     | 如 `Application.persistentDataPath`                         |
+| `SetResourceMode(ResourceMode)`                        | 必须                  | 设置资源模式         | 如 `Package` / `Updatable` / `UpdatableWhilePlaying`        |
+| `SetResourceHelper(IResourceHelper)`                   | 必须                  | 设置资源助手         | 用于文件读取、场景卸载、资源释放等逻辑，需要自行实现        |
+| `AddLoadResourceAgentHelper(ILoadResourceAgentHelper)` | 必须                  | 添加加载资源代理助手 | 用于 AssetBundle 读取、解析、加载，可添加多个，需要自行实现 |
+| `SetObjectPoolManager(IObjectPoolManager)`             | 必须                  | 设置对象池管理器     | 用于资源对象池管理，通常接入框架内置对象池模块              |
+| `SetDownloadManager(IDownloadManager)`                 | 仅 Updatable 模式必须 | 设置下载管理器       | 资源热更新下载使用，通常接入框架内置下载模块                |
+| `SetFileSystemManager(IFileSystemManager)`             | 可选                  | 设置文件系统管理器   | 用于文件系统模式下的资源读取，可优化合并 AB 包存储          |
+| `SetCurrentVariant(string)`                            | 可选                  | 设置当前资源变体     | 如语言包、渠道包等资源变体标识                              |
+| `SetDecryptResourceCallback(...)`                      | 可选                  | 设置资源解密回调     | 不设置则使用默认逻辑                                        |
+
+
 
 ### 流程图
+
+其他成员变量相对来说不那么重要,有分析到再进行解释,下面放两张AI生成的流程图来大致理解不同模式下是如何进行资源加载的
 
 - 单机模式
 
